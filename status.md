@@ -1,2 +1,3 @@
-ERROR: codeforces id is wrong
-OK: folder prj.codeforces structure is correct
+OK: file codeforces.id is correct
+ERROR: invalid file name 136b
+ERROR: invalid file name 339b
