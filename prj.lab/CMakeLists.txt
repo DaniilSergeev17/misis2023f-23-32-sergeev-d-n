@@ -1,1 +1,1 @@
-add_executable(struct_complex struct_complex.cpp)
+add_executable(test_complex test_complex.cpp)
