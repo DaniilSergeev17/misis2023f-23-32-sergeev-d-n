@@ -9,7 +9,7 @@ struct Complex {
 	explicit Complex(const double real);
 	Complex(const double real, const double imaginary);
 
-	bool operator==(const Complex& rhs) const { return (re == rhs.re) == (im == rhs.im); }
+	bool operator==(const Complex& rhs) const { return (re == rhs.re) && (im == rhs.im); }
 	bool operator!=(const Complex& rhs) const { return (!operator==(rhs)); }
 
 	Complex& operator+=(const Complex& rhs);
@@ -27,6 +27,8 @@ struct Complex {
 
 Complex operator+(const Complex& lhs, const Complex& rhs);
 Complex operator-(const Complex& lhs, const Complex& rhs);
+Complex operator*(const Complex& lhs, const Complex& rhs);
+Complex operator/(const Complex& lhs, const Complex& rhs);
 
 inline std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs)
 {
@@ -54,11 +56,23 @@ bool testParse(const std::string& str)
 }
 
 int main() {
-	Complex z;
-	z += Complex(8.0);
 	testParse("{8.9,9}");
 	testParse("{8.9, 9}");
 	testParse("{8.9,9");
+	// тесты операторов (+=, +, -, *, /)
+	Complex z;
+	Complex z2;
+	std::cout << z << "\n";
+	std::cout << z2 << "\n";
+	z += Complex(8.0, 5);
+	z2 += Complex(9.0, 6);
+	std::cout << z << "  " << 'z' << "\n";
+	std::cout << z2 << "  " << "z2" << "\n";
+	std::cout << z - z2 << "  " << "z - z2" << "\n";
+	std::cout << z * z2 << "  " << "z * z2" << "\n";
+	std::cout << z / z2 << "  " << "z / z2" << "\n";
+	z2 -= Complex(1.0, 1);
+	std::cout << z2 << "  " << "z2 -= (1, 1)" << "\n";
 }
 
 Complex::Complex(const double real)
@@ -71,30 +85,47 @@ Complex::Complex(const double real, const double imaginary)
 {
 }
 
-Complex& Complex::operator+=(const Complex& rhs)
-{
+Complex& Complex::operator+=(const Complex& rhs) {
 	re += rhs.re;
 	im += rhs.im;
 	return *this;
 }
 
-Complex operator+(const Complex & lhs, const Complex & rhs)
-{
+Complex operator+(const Complex& lhs, const Complex& rhs) {
 	Complex sum(lhs);
 	sum += rhs;
 	return sum;
 }
 
-Complex operator-(const Complex & lhs, const Complex & rhs)
-{
+Complex operator-(const Complex& lhs, const Complex& rhs) {
 	return Complex(lhs.re - rhs.re, lhs.im - rhs.im);
 }
 
-Complex & Complex::operator*=(const double rhs)
-{
+Complex& Complex::operator*=(const double rhs) {
 	re *= rhs;
 	im *= rhs;
 	return *this;
+}
+
+// вычитание с присваиванием
+Complex& Complex::operator-=(const Complex& rhs) {
+	re -= rhs.re;
+	im -= rhs.im;
+	return *this;
+}
+
+// умножение комплексного на комплексное
+Complex operator*(const Complex& lhs, const Complex& rhs) {
+	double real = lhs.re * rhs.re - lhs.im * rhs.im;
+	double imaginary = lhs.re * rhs.im + lhs.im * rhs.re;
+	return Complex(real, imaginary);
+}
+
+// деление комплексного на комплексное
+Complex operator/(const Complex& lhs, const Complex& rhs) {
+	double real = (lhs.re * rhs.re + lhs.im * rhs.im) / (std::pow(rhs.re, 2) + std::pow(rhs.im, 2));
+	double imaginary = (lhs.im * rhs.re - lhs.re * rhs.im) / (std::pow(rhs.re, 2) + std::pow(rhs.im, 2));
+	return Complex(real, imaginary);
 }
 
 std::ostream & Complex::writeTo(std::ostream & ostrm) const
