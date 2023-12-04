@@ -1,6 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
-#include "dynarr.hpp"
+#include "dynarr/dynarr.hpp"
 
 
 TEST_CASE("dynarr ctor") {
