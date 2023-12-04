@@ -1,5 +1,7 @@
-add_library(dynarr dynarr.hpp dynarr.cpp)
-
-add_executable(test_dynarr test_dynarr.cpp)
-
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_dynarr)
+add_library(dynarr dynarr.cpp dynarr.hpp)
+set_property(TARGET dynarr PROPERTY CXX_STANDARD 20)
+target_include_directories(dynarr PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+  $<INSTALL_INTERFACE:include>
+)
+install(TARGETS dynarr)
