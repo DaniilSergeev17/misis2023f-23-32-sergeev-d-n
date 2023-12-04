@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sstream>
-#include "complex.hpp"
+#include "complex/complex.hpp"
 
 bool testParse(const std::string& str)
 {
@@ -21,7 +21,7 @@ int main() {
 	testParse("{8.9,9}");
 	testParse("{8.9, 9}");
 	testParse("{8.9,9");
-	// тесты операторов (+=, +, -, *, /)
+	// ГІГҐГ±ГІГ» Г®ГЇГҐГ°Г ГІГ®Г°Г®Гў (+=, +, -, *, /)
 	Complex z;
 	Complex z2;
 	std::cout << z << "\n";
