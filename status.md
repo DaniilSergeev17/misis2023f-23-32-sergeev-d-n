@@ -1,7 +1,8 @@
-CHECK: 20231203-182341
+CHECK: 20231205-134139
 OK: file codeforces.id is correct
 OK: folder prj.codeforces structure is correct
-ERROR: CMake generator failed
+OK: CMake generator successed
+OK: CMake build (MSVC x64) successed
 ERROR: lab complex - test build failed
 ERROR: lab rational - test build failed
-STATUS: lab dynarr - skipped
+STATUS: lab dynarr - test-failed
