@@ -1,4 +1,4 @@
-CHECK: 20231211-074854
+CHECK: 20231212-000516
 OK: file codeforces.id is correct
 OK: folder prj.codeforces structure is correct
 OK: CMake generator successed
